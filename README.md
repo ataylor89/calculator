@@ -17,6 +17,6 @@ This is all a little long-winded, so let's write it down as a series of steps.
 1. Open Terminal and navigate to the root directory of the project
 2. Run the command "python server.py" from the root directory of the project
 3. Open the URL "http://127.0.0.1:5000/" in a web browser
-4. Type any expression into the text field, like (2+3)^3 + 75, and click on the Evaluate button to see the result.
+4. Type any expression into the text field, like (2+3)^3 + 75, and click on the Evaluate button to see the result
 
 This project uses the Flask framework, and we can talk more later on about how to use Flask. I am going to take a short break and when I get back we can talk about Flask.
