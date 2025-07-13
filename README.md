@@ -4,7 +4,7 @@
 
 If you're on MacOS, you can open the Terminal application, and navigate to the root directory of this project using the cd command. Once you are in the root directory, you can type the following command.
 
-    python server.py
+    % python server.py
 
 The command "python server.py" executes the Python program. The module "server.py" is the main module of the project. You can also think of it as the entry point. It starts a web server on port 5000.
 
