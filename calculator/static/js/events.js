@@ -6,6 +6,6 @@ function eval(e) {
     e.preventDefault();
 
     $.post('/evaluate', $('#inputform').serialize(), function(data) {
-        $('#result').html(data['result']);
+        $('#result').html('The result is: ' + data['result']);
     });
 }
