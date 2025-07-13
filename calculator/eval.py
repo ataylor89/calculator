@@ -1,7 +1,3 @@
-import sys
-
-error_input = "The expression contains invalid input"
-
 digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
 operators = {'+', '-', '*', '/', '^'}
 parentheses = {'(', ')'}
@@ -31,7 +27,7 @@ def parse(expression):
         elif c in digits or c == '.':
             str += c
         else:
-            raise ValueError(error_input)
+            raise ValueError("The expression contains invalid input")
     return str.split()
 
 def is_float(s):
