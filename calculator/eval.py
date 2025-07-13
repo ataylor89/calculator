@@ -1,6 +1,5 @@
 import sys
 
-error_cmdline = "Usage: python eval.py expression.txt"
 error_input = "The expression contains invalid input"
 
 digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
@@ -121,17 +120,3 @@ def simplify(tokens):
             del tokens[index-2]
 
     return simplify(tokens)
-
-def main():
-    if len(sys.argv) != 2:
-        print(error_cmdline)
-        sys.exit(0)
-
-    file = open(sys.argv[1], "r")
-    expression = file.read()
-    
-    result = eval(expression)
-    print(result)
-
-if __name__ == "__main__":
-    main()
