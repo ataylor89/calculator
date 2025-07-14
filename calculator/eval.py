@@ -46,8 +46,15 @@ def next(tokens):
 
     for i in range(0, n):
         token = tokens[i]
-        
-        if is_float(token):
+
+        if i < n - 1 and tokens[i:i+2] == '()':
+            del tokens[i:i+2]
+            return next(tokens)
+        if i < n - 2 and tokens[i] == '(' and tokens[i+2] == ')':
+            del tokens[i]
+            del tokens[i+1]
+            return next(tokens)
+        elif is_float(token):
             continue
         elif token == '(':
             nestedness += 1
@@ -68,6 +75,8 @@ def next(tokens):
             op = 'division'
         elif token == '^':
             op = 'exponentiation'
+        else:
+            return None
 
         priority = precedence[op] + 3 * nestedness
 
@@ -79,11 +88,11 @@ def next(tokens):
     return (index, operation)
             
 def simplify(tokens):
+    (index, operation) = next(tokens)
+
     if len(tokens) == 1:
         f = float(tokens[0])
         return int(f) if f.is_integer() else f
-
-    (index, operation) = next(tokens)
 
     if operation == 'negation':
         op1 = -1 * float(tokens[index+1])
