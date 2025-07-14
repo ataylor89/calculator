@@ -50,7 +50,7 @@ To summarize our discussion... we can write a list of main points, a list of key
 2. The main module, app.py, starts the web server on port 5000
 3. The views.py module defines the request handlers
 4. The eval.py module contains the code for evaluating an expression, like "(2+3)^3 + 75"
-5. The __init__.py module defines a package variable named "app" as an instance of the Flask class
+5. The init module defines a package variable named "app" as an instance of the Flask class
 
 It is worth mentioning that we can use the package variable "app" anywhere in our project, just by importing it from the calculator module. This helps us avoid circular dependencies, and any other complications that can arise when sharing a variable between different modules.
 
