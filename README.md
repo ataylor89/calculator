@@ -52,6 +52,6 @@ To summarize our discussion... we can write a list of main points, a list of key
 4. The eval.py module contains the code for evaluating an expression, like "(2+3)^3 + 75"
 5. The init module defines a package variable named "app" as an instance of the Flask class
 
-It is worth mentioning that we can use the package variable "app" anywhere in our project, just by importing it from the calculator module. This helps us avoid circular dependencies, and any other complications that can arise when sharing a variable between different modules.
+It is worth mentioning that we can use the package variable "app" anywhere in our project, just by importing it from the calculator module. This helps us avoid circular dependencies, and other complications that can arise when sharing a variable between different modules.
 
 Well, it's important to keep this section short, so I'll end it on this note. Sometime later, either tonight or later this week, I'll add a third section to this readme on how to use the Flask framework.
