@@ -6,6 +6,11 @@ function eval(e) {
     e.preventDefault();
 
     $.post('/evaluate', $('#inputform').serialize(), function(data) {
-        $('#result').html('The result is: ' + data['result']);
+        if (data['result'] == null) {
+            $('#result').html('The expression is invalid');
+        }
+        else {
+            $('#result').html('The result is ' + data['result']);
+        }
     });
 }
