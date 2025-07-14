@@ -32,7 +32,7 @@ In order to explain the design of this program, we can describe each module in d
 Module | Description
 ------ | -----------
 app.py | The main module, the entry point. Starts the web server on port 5000.
-__init__.py | Defines a package variable named "app"
+\__init__.py | Defines a package variable named "app"
 views.py | Defines the request handlers
 eval.py | This file has an eval function that evaluates a string expression
 
