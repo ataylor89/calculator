@@ -97,11 +97,7 @@ def simplify(tokens):
     if operation == 'negation':
         op1 = -1 * float(tokens[index+1])
         tokens[index] = op1
-        
         del tokens[index+1]
-        if tokens[index-1] == '(' and tokens[index+1] == ')':
-            del tokens[index+1]
-            del tokens[index-1]
     else:
         op1 = float(tokens[index-1])
         op2 = float(tokens[index+1])
@@ -119,9 +115,5 @@ def simplify(tokens):
         
         tokens[index-1] = op1 
         del tokens[index:index+2]
-
-        if tokens[index-2] == '(' and tokens[index] == ')':
-            del tokens[index]
-            del tokens[index-2]
 
     return simplify(tokens)
