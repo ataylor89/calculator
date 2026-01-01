@@ -102,7 +102,7 @@ def simplify(tokens):
         elif operator == '^':
             result = op1 ** op2
         else:
-            raise InvalidExpression('The token %s is not valid.' %operator)
+            raise InvalidExpression('The token %s is not valid' %operator)
         
         tokens[index-1] = result
         del tokens[index:index+2]
