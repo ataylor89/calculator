@@ -1,3 +1,5 @@
+from strategies.exceptions import InvalidExpression
+
 digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
 operators = {'+', '-', '*', '/', '^'}
 parentheses = {'(', ')'}
@@ -12,11 +14,8 @@ precedence = {
 }
 
 def eval(expression):
-    try:
-        tokens = parse(expression)
-        return simplify(tokens)
-    except ValueError as err:
-        print(err)
+    tokens = parse(expression)
+    return simplify(tokens)
 
 def parse(expression):
     str = ''
@@ -27,7 +26,7 @@ def parse(expression):
         elif c in digits or c == '.':
             str += c
         else:
-            raise ValueError('The expression contains invalid input')
+            raise InvalidExpression('The expression contains an invalid token')
     return str.split()
 
 def is_number(s):
