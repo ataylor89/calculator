@@ -2,7 +2,7 @@ from strategies.exceptions import InvalidExpression
 import math
 
 digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
-operators = {'+', '-', '*', '/', '^'}
+operators = {'+', '-', '*', '/', '_', '^'}
 parentheses = {'(', ')'}
 
 def eval(expression):
@@ -21,7 +21,11 @@ def parse(expression):
             str += c
         else:
             raise InvalidExpression('The expression contains an invalid token')
-    return str.split()
+    tokens = str.split()
+    for i in range(0, len(tokens)):
+        if tokens[i] == '-' and (i == 0 or tokens[i-1] == '(' or tokens[i-1] in operators):
+            tokens[i] = '_'
+    return tokens
 
 def is_number(s):
     try:
@@ -34,11 +38,6 @@ def is_left_associative(operator):
     if operator in ('^', '_'):
         return False
     return True
-
-def is_negation(token, index, tokens):
-    if token == '-' and (index == 0 or tokens[index-1] == '(' or tokens[index-1] in operators):
-        return True
-    return False
 
 def precedence(operator):
     if operator in ('+', '-'):
@@ -65,8 +64,6 @@ def convert_to_postfix(tokens):
                 res.append(st.pop())
             st.pop()
         else:
-            if is_negation(token, i, tokens):
-                token = '_'
             la = is_left_associative(token)
             while st and st[-1] != '(' and (pr(st[-1]) > pr(token) or (pr(st[-1]) == pr(token) and la)):
                 res.append(st.pop())
