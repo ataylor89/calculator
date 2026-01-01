@@ -1,4 +1,4 @@
-from strategies import strategy1, strategy2
+from strategies import strategy1, strategy2, strategy3
 from strategies.exceptions import InvalidExpression, InvalidStrategy
 import argparse
 
@@ -7,6 +7,8 @@ def eval(expression, strategy=1):
         return strategy1.eval(expression)
     elif strategy == 2:
         return strategy2.eval(expression)
+    elif strategy == 3:
+        return strategy3.eval(expression)
     else:
         raise InvalidStrategy()
 
