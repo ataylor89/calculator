@@ -30,7 +30,7 @@ def parse(expression):
             raise ValueError('The expression contains invalid input')
     return str.split()
 
-def is_float(s):
+def is_number(s):
     try:
         float(s)
         return True
@@ -54,7 +54,7 @@ def next(tokens):
             del tokens[i]
             del tokens[i+1]
             return next(tokens)
-        elif is_float(token):
+        elif is_number(token):
             continue
         elif token == '(':
             nestedness += 1
