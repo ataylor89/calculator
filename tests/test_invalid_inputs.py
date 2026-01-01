@@ -6,7 +6,7 @@ class TestInvalidInputs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.test_data = []
-        with open('tests/invalid_inputs.txt', 'r') as file:
+        with open('tests/test_data/invalid_inputs.txt', 'r') as file:
             for line in file:
                 cls.test_data.append(line.strip())
     

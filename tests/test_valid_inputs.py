@@ -6,7 +6,7 @@ class TestValidInputs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.test_data = []
-        with open('tests/valid_inputs.txt', 'r') as file:
+        with open('tests/test_data/valid_inputs.txt', 'r') as file:
             for line in file:
                 parts = line.split("=")
                 test_input = parts[0].strip()
