@@ -1,3 +1,4 @@
+from strategies.exceptions import InvalidExpression
 import math
 
 digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
@@ -5,13 +6,10 @@ operators = {'+', '-', '*', '/', '^'}
 parentheses = {'(', ')'}
 
 def eval(expression):
-    try:
-        tokens = parse(expression)
-        postfix = convert_to_postfix(tokens)
-        result = eval_postfix(postfix)
-        return int(result) if result % 1 == 0 else result
-    except ValueError as err:
-        print(err)
+    tokens = parse(expression)
+    postfix = convert_to_postfix(tokens)
+    result = eval_postfix(postfix)
+    return int(result) if result % 1 == 0 else result
 
 def parse(expression):
     str = ''
@@ -22,7 +20,7 @@ def parse(expression):
         elif c in digits or c == '.':
             str += c
         else:
-            raise ValueError('The expression contains invalid input')
+            raise InvalidExpression('The expression contains an invalid token')
     return str.split()
 
 def is_number(s):
@@ -98,4 +96,6 @@ def eval_postfix(tokens):
                 stack.append(val2 / val1)
             elif token == '^':
                 stack.append(math.pow(val2, val1))
+    if len(stack) > 1:
+        raise InvalidExpression('The resulting stack after postfix evaluation has multiple elements.')
     return stack.pop()
