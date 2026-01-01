@@ -49,6 +49,7 @@ def next(tokens):
 
     for i in range(0, n):
         token = tokens[i]
+
         if i < n - 1 and tokens[i:i+2] == '()':
             del tokens[i:i+2]
             return next(tokens)
