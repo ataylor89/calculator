@@ -14,15 +14,15 @@ def eval(expression):
         print(err)
 
 def parse(expression):
-    str = ""
-    expression = expression.strip().replace(" ", "")
+    str = ''
+    expression = expression.strip().replace(' ', '')
     for c in expression:
         if c in parentheses or c in operators:
-            str += " " + c + " "
+            str += ' ' + c + ' '
         elif c in digits or c == '.':
             str += c
         else:
-            raise ValueError("The expression contains invalid input")
+            raise ValueError('The expression contains invalid input')
     return str.split()
 
 def is_number(s):
