@@ -1,17 +1,8 @@
 from strategies.exceptions import InvalidExpression
 
 digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
-operators = {'+', '-', '*', '/', '^'}
+operators = {'+', '-', '*', '/', '_', '^'}
 parentheses = {'(', ')'}
-
-precedence = {
-    'addition': 0,
-    'subtraction': 0,
-    'multiplication': 1,
-    'division': 1,
-    'negation': 1,
-    'exponentiation': 2
-}
 
 def eval(expression):
     tokens = parse(expression)
@@ -27,7 +18,11 @@ def parse(expression):
             str += c
         else:
             raise InvalidExpression('The expression contains an invalid token')
-    return str.split()
+    tokens = str.split()
+    for i in range(0, len(tokens)):
+        if tokens[i] == '-' and (i == 0 or tokens[i-1] == '(' or tokens[i-1] in operators):
+            tokens[i] = '_'
+    return tokens
 
 def is_number(s):
     try:
@@ -36,16 +31,24 @@ def is_number(s):
     except:
         return False
 
+def precedence(operator):
+    if operator in ('+', '-'):
+        return 0
+    elif operator in ('*', '/', '_'):
+        return 1
+    elif operator == '^':
+        return 2
+    else:
+        return -1
+
 def next(tokens):
     n = len(tokens)
     index = 0
-    operation = None
     nestedness = 0
     highest_priority = -1
 
     for i in range(0, n):
         token = tokens[i]
-
         if i < n - 1 and tokens[i:i+2] == '()':
             del tokens[i:i+2]
             return next(tokens)
@@ -61,58 +64,46 @@ def next(tokens):
         elif token == ')':
             nestedness -= 1
             continue
-        elif token == '+':
-            op = 'addition'
-        elif token == '-':
-            if i == 0 or tokens[i-1] in operators or tokens[i-1] == '(':
-                op = 'negation'
-            else:
-                op = 'subtraction'
-        elif token == '*':
-            op  = 'multiplication'
-        elif token == '/':
-            op = 'division'
-        elif token == '^':
-            op = 'exponentiation'
+        elif token in operators:
+            priority = precedence(token) + 3 * nestedness
+            if priority > highest_priority:
+                highest_priority = priority
+                index = i
         else:
             return None
 
-        priority = precedence[op] + 3 * nestedness
-
-        if priority > highest_priority:
-            highest_priority = priority
-            index = i
-            operation = op
-
-    return (index, operation)
+    return index
             
 def simplify(tokens):
-    (index, operation) = next(tokens)
-
     if len(tokens) == 1:
         f = float(tokens[0])
         return int(f) if f.is_integer() else f
 
-    if operation == 'negation':
-        op1 = -1 * float(tokens[index+1])
-        tokens[index] = op1
+    index = next(tokens)
+    operator = tokens[index]
+
+    if operator == '_':
+        result = -1 * float(tokens[index+1])
+        tokens[index] = result
         del tokens[index+1]
     else:
         op1 = float(tokens[index-1])
         op2 = float(tokens[index+1])
 
-        if operation == 'addition':
-            op1 = op1 + op2
-        elif operation == 'subtraction':
-            op1 = op1 - op2
-        elif operation == 'multiplication':
-            op1 = op1 * op2
-        elif operation == 'division':
-            op1 = op1 / op2
-        elif operation == 'exponentiation':
-            op1 = op1 ** op2
+        if operator == '+':
+            result = op1 + op2
+        elif operator == '-':
+            result = op1 - op2
+        elif operator == '*':
+            result = op1 * op2
+        elif operator == '/':
+            result = op1 / op2
+        elif operator == '^':
+            result = op1 ** op2
+        else:
+            raise InvalidExpression('The token %s is not valid.' %operator)
         
-        tokens[index-1] = op1 
+        tokens[index-1] = result
         del tokens[index:index+2]
 
     return simplify(tokens)
