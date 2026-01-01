@@ -1,4 +1,4 @@
-from strategies import strategy1
+from strategies import strategy1, strategy2
 import argparse
 
 def main():
@@ -11,6 +11,9 @@ def main():
         return
     if args.strategy == 1:
         result = strategy1.eval(args.expression)
+        print(result)
+    elif args.strategy == 2:
+        result = strategy2.eval(args.expression)
         print(result)
 
 if __name__ == '__main__':
