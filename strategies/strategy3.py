@@ -104,7 +104,7 @@ def simplify(tokens):
 
     index = next(tokens)
 
-    if not index:
+    if index is None:
         raise InvalidExpression('Unable to find an operation to perform')
 
     validate(index, tokens)
