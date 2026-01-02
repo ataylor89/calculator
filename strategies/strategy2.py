@@ -44,30 +44,17 @@ def precedence(operator):
         return 1
     elif operator == '^':
         return 2
-    else:
-        return -1
 
-def validate_operation(operators, operands):
-    operator = operators[-1]
-
+def perform_operation(operators, operands):
+    operator = operators.pop()
     if operator == '_':
         if len(operands) == 0:
             raise InvalidExpression('A negation operation is missing an operand')
-    else:
-        if len(operands) < 2:
-            raise InvalidExpression('A binary operation is missing one or more operands')
-
-        if operator == '/' and operands[-1] == 0:
-            raise InvalidExpression('Division by zero is not allowed')
-
-def perform_operation(operators, operands):
-    validate_operation(operators, operands)
-    operator = operators.pop()
-    
-    if operator == '_':
         operand1 = operands.pop()
         operands.append(-1 * operand1)
     elif operator in valid_operators:
+        if len(operands) < 2:
+            raise InvalidExpression('A binary operation is missing one or more operands')
         operand2 = operands.pop()
         operand1 = operands.pop()
         if operator == '+':
@@ -77,6 +64,8 @@ def perform_operation(operators, operands):
         elif operator == '*':
             operands.append(operand1 * operand2)
         elif operator == '/':
+            if operator == '/' and operand2 == 0:
+                raise InvalidExpression('Division by zero is not allowed')
             operands.append(operand1 / operand2)
         elif operator == '^':
             operands.append(operand1 ** operand2)
