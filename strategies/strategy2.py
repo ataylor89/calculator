@@ -77,21 +77,27 @@ def eval_postfix(tokens):
         if is_number(token):
             stack.append(token)
         elif token == '_':
+            if len(stack) == 0:
+                raise InvalidExpression('A negation operation is missing an operand')
             val = stack.pop()
             stack.append(-1 * val)
         else:
-            val1 = stack.pop()
+            if len(stack) < 2:
+                raise InvalidExpression('A binary operation is missing one or more operands')
             val2 = stack.pop()
+            val1 = stack.pop()
             if token == '+':
-                stack.append(val2 + val1)
+                stack.append(val1 + val2)
             elif token == '-':
-                stack.append(val2 - val1)
+                stack.append(val1 - val2)
             elif token == '*':
-                stack.append(val2 * val1)
+                stack.append(val1 * val2)
             elif token == '/':
-                stack.append(val2 / val1)
+                if val2 == 0:
+                    raise InvalidExpression('Division by zero is not allowed')
+                stack.append(val1 / val2)
             elif token == '^':
-                stack.append(val2 ** val1)
+                stack.append(val1 ** val2)
     if len(stack) > 1:
         raise InvalidExpression('The resulting stack after postfix evaluation has multiple elements.')
     return stack.pop()
