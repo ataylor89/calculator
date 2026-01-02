@@ -6,6 +6,8 @@ parentheses = {'(', ')'}
 
 def eval(expression):
     tokens = parse(expression)
+    if len(tokens) == 0:
+        raise InvalidExpression('The expression is empty')
     return simplify(tokens)
 
 def parse(expression):
@@ -38,12 +40,10 @@ def precedence(operator):
         return 1
     elif operator == '^':
         return 2
-    else:
-        return -1
 
 def next(tokens):
     n = len(tokens)
-    index = 0
+    index = None
     nestedness = 0
     highest_priority = -1
 
@@ -73,10 +73,7 @@ def next(tokens):
 
     return index
 
-def validate_syntax(index, tokens):
-    if tokens[index] not in operators:
-        raise InvalidExpression('Expecting an operator at index=%d' %index)
-
+def validate_operation(index, tokens):
     operator = tokens[index]
 
     if operator == '_':
@@ -101,19 +98,16 @@ def validate_syntax(index, tokens):
             raise InvalidExpression('Division by zero is not allowed')
 
 def simplify(tokens):
-    if len(tokens) == 0:
-        raise InvalidExpression('The expression is empty')
-
-    if len(tokens) == 1 and not is_number(tokens[0]):
-        raise InvalidExpression('The expression has invalid syntax')
-
-    if len(tokens) == 1:
+    if len(tokens) == 1 and is_number(tokens[0]):
         f = float(tokens[0])
         return int(f) if f.is_integer() else f
 
     index = next(tokens)
-    validate_syntax(index, tokens)
 
+    if not index:
+        raise InvalidExpression('Unable to find an operation to perform')
+
+    validate_operation(index, tokens)
     operator = tokens[index]
 
     if operator == '_':
