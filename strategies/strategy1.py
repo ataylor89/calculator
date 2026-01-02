@@ -70,17 +70,44 @@ def next(tokens):
             if priority > highest_priority:
                 highest_priority = priority
                 index = i
-        else:
-            return None
 
     return index
-            
+
+def validate_syntax(index, tokens):
+    if tokens[index] not in operators:
+        raise InvalidExpression('Expecting an operator at index=%d' %index)
+
+    operator = tokens[index]
+
+    if operator == '_':
+        if len(tokens) < index + 2:
+            raise InvalidExpression('A negation operation is missing an operand')
+
+        operand = tokens[index+1]
+
+        if not is_number(operand):
+            raise InvalidExpression('A negation operation has an invalid operand')
+    else:
+        if index == 0 or len(tokens) < index + 2:
+            raise InvalidExpression('A binary operation is missing one or more operands')
+
+        operand1 = tokens[index-1]
+        operand2 = tokens[index+1]
+
+        if not is_number(operand1) or not is_number(operand2):
+            raise InvalidExpression('A binary operation has one or more invalid operands')
+
+        if operator == '/' and float(operand2) == 0:
+            raise InvalidExpression('Division by zero is not allowed')
+
 def simplify(tokens):
     if len(tokens) == 1:
         f = float(tokens[0])
         return int(f) if f.is_integer() else f
 
     index = next(tokens)
+    validate_syntax(index, tokens)
+
     operator = tokens[index]
 
     if operator == '_':
@@ -101,8 +128,6 @@ def simplify(tokens):
             result = op1 / op2
         elif operator == '^':
             result = op1 ** op2
-        else:
-            raise InvalidExpression('The token %s is not valid' %operator)
         
         tokens[index-1] = result
         del tokens[index:index+2]

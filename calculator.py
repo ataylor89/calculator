@@ -22,8 +22,6 @@ def main():
         print(result)
     except (InvalidExpression, InvalidStrategy) as e:
         print(e)
-    except ZeroDivisionError as e:
-        print('Division by zero is not allowed')
     except Exception as e:
         print('There was an error while evaluating the expression')
 
