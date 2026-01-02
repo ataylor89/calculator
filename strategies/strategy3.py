@@ -73,7 +73,7 @@ def next(tokens):
 
     return index
 
-def validate_operation(index, tokens):
+def validate(index, tokens):
     operator = tokens[index]
 
     if operator == '_':
@@ -107,7 +107,7 @@ def simplify(tokens):
     if not index:
         raise InvalidExpression('Unable to find an operation to perform')
 
-    validate_operation(index, tokens)
+    validate(index, tokens)
     operator = tokens[index]
 
     if operator == '_':
