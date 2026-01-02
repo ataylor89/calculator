@@ -47,7 +47,21 @@ def precedence(operator):
     else:
         return -1
 
-def performOperation(operators, operands):
+def validate_operation(operators, operands):
+    operator = operators[-1]
+
+    if operator == '_':
+        if len(operands) == 0:
+            raise InvalidExpression('A negation operation is missing an operand')
+    else:
+        if len(operands) < 2:
+            raise InvalidExpression('A binary operation is missing one or more operands')
+
+        if operator == '/' and operands[-1] == 0:
+            raise InvalidExpression('Division by zero is not allowed')
+
+def perform_operation(operators, operands):
+    validate_operation(operators, operands)
     operator = operators.pop()
     
     if operator == '_':
@@ -66,8 +80,6 @@ def performOperation(operators, operands):
             operands.append(operand1 / operand2)
         elif operator == '^':
             operands.append(operand1 ** operand2)
-    else:
-        raise InvalidExpression('Tried to perform an invalid operation.')
 
 def eval_tokens(tokens):
     operands = []
@@ -81,16 +93,16 @@ def eval_tokens(tokens):
         elif token == '(':
             operators.append(token)
         elif token == ')':
-            while operators[-1] != '(':
-                performOperation(operators, operands)
+            while operators and operators[-1] != '(':
+                perform_operation(operators, operands)
             operators.pop()
-        else:
+        elif token in valid_operators:
             la = is_left_associative(token)
             while ops and ops[-1] != '(' and (pr(ops[-1]) > pr(token) or (pr(ops[-1]) == pr(token) and la)):
-                performOperation(operators, operands)
+                perform_operation(operators, operands)
             operators.append(token)
     
     while operators:
-        performOperation(operators, operands)
+        perform_operation(operators, operands)
 
     return operands.pop()
