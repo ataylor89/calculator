@@ -101,6 +101,12 @@ def validate_syntax(index, tokens):
             raise InvalidExpression('Division by zero is not allowed')
 
 def simplify(tokens):
+    if len(tokens) == 0:
+        raise InvalidExpression('The expression is empty')
+
+    if len(tokens) == 1 and not is_number(tokens[0]):
+        raise InvalidExpression('The expression has invalid syntax')
+
     if len(tokens) == 1:
         f = float(tokens[0])
         return int(f) if f.is_integer() else f
