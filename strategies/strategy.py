@@ -12,21 +12,37 @@ class AbstractStrategy(ABC):
         pass
 
     def parse(self, expression):
-        str = ''
-        expression = expression.strip().replace(' ', '')
-        for c in expression:
-            if c in self._parentheses or c in self._operators:
-                str += ' ' + c + ' '
-            elif c in self._digits or c == '.':
-                str += c
+        tokens = []
+        buffer = ''
+        expression = expression.strip()
+        n = len(expression)
+        for i in range(0, n):
+            ch = expression[i]
+            if ch in self._operators or ch in self._parentheses:
+                if buffer:
+                    if self.is_number(buffer):
+                        tokens.append(buffer)
+                        buffer = ''
+                    else:
+                        raise InvalidExpression('The string buffer cannot be parsed as a number')
+                tokens.append(ch)
+            elif ch == ' ':
+                if buffer:
+                    if self.is_number(buffer):
+                        tokens.append(buffer)
+                        buffer = ''
+                    else:
+                        raise InvalidExpression('The string buffer cannot be parsed as a number')
+            elif ch in self._digits or ch == '.':
+                buffer += ch
+                if buffer and i == n - 1:
+                    if self.is_number(buffer):
+                        tokens.append(buffer)
+                        buffer = ''
+                    else:
+                        raise InvalidExpression('The string buffer cannot be parsed as a number')
             else:
-                raise InvalidExpression('The expression contains an invalid token')
-        tokens = str.split()
-        if len(tokens) == 0:
-            raise InvalidExpression('The expression is empty')
-        for i in range(0, len(tokens)):
-            if tokens[i] == '-' and (i == 0 or tokens[i-1] == '(' or tokens[i-1] in self._operators):
-                tokens[i] = '_'
+                raise InvalidExpression('The expression contains an invalid character')
         return tokens
 
     def is_number(self, s):
