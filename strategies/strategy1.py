@@ -8,8 +8,7 @@ class Strategy1(AbstractStrategy):
     def eval(self, expression):
         tokens = self.parse(expression)
         postfix = self.convert_to_postfix(tokens)
-        result = self.eval_postfix(postfix)
-        return int(result) if result % 1 == 0 else result
+        return self.eval_postfix(postfix)
 
     def convert_to_postfix(self, tokens):
         st = []
@@ -63,4 +62,5 @@ class Strategy1(AbstractStrategy):
                     stack.append(val1 ** val2)
         if len(stack) > 1:
             raise InvalidExpression('The resulting stack after postfix evaluation has multiple elements.')
-        return stack.pop()
+        result = stack.pop()
+        return int(result) if result % 1 == 0 else result
