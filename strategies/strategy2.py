@@ -6,7 +6,7 @@ class Strategy2(AbstractStrategy):
         super().__init__()
 
     def eval(self, expression):
-        tokens = super().parse(expression)
+        tokens = self.parse(expression)
         result = self.eval_tokens(tokens)
         return int(result) if result % 1 == 0 else result
 
@@ -38,11 +38,11 @@ class Strategy2(AbstractStrategy):
     def eval_tokens(self, tokens):
         operands = []
         operators = ops = []
-        pr = super().precedence
+        pr = self.precedence
 
         for i in range(0, len(tokens)):
             token = tokens[i]
-            if super().is_number(token):
+            if self.is_number(token):
                 operands.append(float(token))
             elif token == '(':
                 operators.append(token)
@@ -51,7 +51,7 @@ class Strategy2(AbstractStrategy):
                     self.perform_operation(operators, operands)
                 operators.pop()
             elif token in self._operators:
-                la = super().is_left_associative(token)
+                la = self.is_left_associative(token)
                 while ops and ops[-1] != '(' and (pr(ops[-1]) > pr(token) or (pr(ops[-1]) == pr(token) and la)):
                     self.perform_operation(operators, operands)
                 operators.append(token)

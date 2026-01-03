@@ -6,7 +6,7 @@ class Strategy1(AbstractStrategy):
         super().__init__()
 
     def eval(self, expression):
-        tokens = super().parse(expression)
+        tokens = self.parse(expression)
         postfix = self.convert_to_postfix(tokens)
         result = self.eval_postfix(postfix)
         return int(result) if result % 1 == 0 else result
@@ -26,7 +26,7 @@ class Strategy1(AbstractStrategy):
                     res.append(st.pop())
                 st.pop()
             elif token in self._operators:
-                la = super().is_left_associative(token)
+                la = self.is_left_associative(token)
                 while st and st[-1] != '(' and (pr(st[-1]) > pr(token) or (pr(st[-1]) == pr(token) and la)):
                     res.append(st.pop())
                 st.append(token)
@@ -37,7 +37,7 @@ class Strategy1(AbstractStrategy):
     def eval_postfix(self, tokens):
         stack = []
         for token in tokens:
-            if super().is_number(token):
+            if self.is_number(token):
                 stack.append(token)
             elif token == '_':
                 if len(stack) == 0:

@@ -6,7 +6,7 @@ class Strategy3(AbstractStrategy):
         super().__init__()
 
     def eval(self, expression):
-        tokens = super().parse(expression)
+        tokens = self.parse(expression)
         if len(tokens) == 0:
             raise InvalidExpression('The expression is empty')
         return self.simplify(tokens)
@@ -27,7 +27,7 @@ class Strategy3(AbstractStrategy):
                 del tokens[i]
                 del tokens[i+1]
                 return self.next(tokens)
-            elif super().is_number(token):
+            elif self.is_number(token):
                 continue
             elif token == '(':
                 nestedness += 1
@@ -36,7 +36,7 @@ class Strategy3(AbstractStrategy):
                 nestedness -= 1
                 continue
             elif token in self._operators:
-                priority = super().precedence(token) + 3 * nestedness
+                priority = self.precedence(token) + 3 * nestedness
                 if priority > highest_priority:
                     highest_priority = priority
                     index = i
@@ -52,7 +52,7 @@ class Strategy3(AbstractStrategy):
 
             operand = tokens[index+1]
 
-            if not super().is_number(operand):
+            if not self.is_number(operand):
                 raise InvalidExpression('A negation operation has an invalid operand')
         else:
             if index == 0 or len(tokens) < index + 2:
@@ -61,14 +61,14 @@ class Strategy3(AbstractStrategy):
             operand1 = tokens[index-1]
             operand2 = tokens[index+1]
 
-            if not super().is_number(operand1) or not super().is_number(operand2):
+            if not self.is_number(operand1) or not self.is_number(operand2):
                 raise InvalidExpression('A binary operation has one or more invalid operands')
 
             if operator == '/' and float(operand2) == 0:
                 raise InvalidExpression('Division by zero is not allowed')
 
     def simplify(self, tokens):
-        if len(tokens) == 1 and super().is_number(tokens[0]):
+        if len(tokens) == 1 and self.is_number(tokens[0]):
             f = float(tokens[0])
             return int(f) if f.is_integer() else f
 
