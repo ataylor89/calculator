@@ -7,8 +7,7 @@ class Strategy2(AbstractStrategy):
 
     def eval(self, expression):
         tokens = self.parse(expression)
-        result = self.eval_tokens(tokens)
-        return int(result) if result % 1 == 0 else result
+        return self.eval_tokens(tokens)
 
     def perform_operation(self, operators, operands):
         operator = operators.pop()
@@ -59,4 +58,5 @@ class Strategy2(AbstractStrategy):
         while operators:
             self.perform_operation(operators, operands)
 
-        return operands.pop()
+        result = operands.pop()
+        return int(result) if result % 1 == 0 else result
