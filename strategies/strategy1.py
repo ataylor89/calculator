@@ -61,6 +61,6 @@ class Strategy1(AbstractStrategy):
                 elif token == '^':
                     stack.append(val1 ** val2)
         if len(stack) > 1:
-            raise InvalidExpression('The resulting stack after postfix evaluation has multiple elements.')
+            raise InvalidExpression('The resulting stack after postfix evaluation has multiple elements')
         result = stack.pop()
         return int(result) if result % 1 == 0 else result
