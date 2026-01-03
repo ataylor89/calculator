@@ -40,12 +40,12 @@ class Strategy1(AbstractStrategy):
                 stack.append(token)
             elif token == '_':
                 if len(stack) == 0:
-                    raise InvalidExpression('A negation operation is missing an operand')
+                    raise InvalidExpression('The negation operation is missing an operand')
                 val = stack.pop()
                 stack.append(-1 * val)
             else:
                 if len(stack) < 2:
-                    raise InvalidExpression('A binary operation is missing one or more operands')
+                    raise InvalidExpression(f'The {token} operation is missing one or more operands')
                 val2 = stack.pop()
                 val1 = stack.pop()
                 if token == '+':
@@ -61,6 +61,6 @@ class Strategy1(AbstractStrategy):
                 elif token == '^':
                     stack.append(val1 ** val2)
         if len(stack) > 1:
-            raise InvalidExpression('The resulting stack after postfix evaluation has multiple elements')
+            raise InvalidExpression('The expression is invalid')
         result = stack.pop()
         return int(result) if result % 1 == 0 else result
