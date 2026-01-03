@@ -62,7 +62,7 @@ def convert_to_postfix(tokens):
             while st and st[-1] != '(':
                 res.append(st.pop())
             st.pop()
-        else:
+        elif token in operators:
             la = is_left_associative(token)
             while st and st[-1] != '(' and (pr(st[-1]) > pr(token) or (pr(st[-1]) == pr(token) and la)):
                 res.append(st.pop())
