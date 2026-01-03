@@ -1,5 +1,7 @@
 import unittest
-from strategies import strategy1, strategy2, strategy3
+from strategies.strategy1 import Strategy1
+from strategies.strategy2 import Strategy2
+from strategies.strategy3 import Strategy3
 
 class TestValidInputs(unittest.TestCase):
     
@@ -16,13 +18,16 @@ class TestValidInputs(unittest.TestCase):
                 cls.test_data.append((test_input, desired_output))
     
     def test_strategy1(self):
+        strategy = Strategy1()
         for (test_input, desired_output) in self.test_data:
-            assert strategy1.eval(test_input) == desired_output
+            assert strategy.eval(test_input) == desired_output
 
     def test_strategy2(self):
+        strategy = Strategy2()
         for (test_input, desired_output) in self.test_data:
-            assert strategy2.eval(test_input) == desired_output
+            assert strategy.eval(test_input) == desired_output
 
     def test_strategy3(self):
+        strategy = Strategy3()
         for (test_input, desired_output) in self.test_data:
-            assert strategy3.eval(test_input) == desired_output
+            assert strategy.eval(test_input) == desired_output

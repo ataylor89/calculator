@@ -1,5 +1,7 @@
 import unittest
-from strategies import strategy1, strategy2, strategy3
+from strategies.strategy1 import Strategy1
+from strategies.strategy2 import Strategy2
+from strategies.strategy3 import Strategy3
 from strategies.exceptions import InvalidExpression
 
 class TestInvalidInputs(unittest.TestCase):
@@ -12,16 +14,19 @@ class TestInvalidInputs(unittest.TestCase):
                 cls.test_data.append(line.strip())
     
     def test_strategy1(self):
+        strategy = Strategy1()
         for test_input in self.test_data:
             with self.assertRaises(InvalidExpression):
-                strategy1.eval(test_input)
+                strategy.eval(test_input)
 
     def test_strategy2(self):
+        strategy = Strategy2()
         for test_input in self.test_data:
             with self.assertRaises(InvalidExpression):
-                strategy2.eval(test_input)
+                strategy.eval(test_input)
 
     def test_strategy3(self):
+        strategy = Strategy3()
         for test_input in self.test_data:
             with self.assertRaises(InvalidExpression):
-                strategy3.eval(test_input)
+                strategy.eval(test_input)

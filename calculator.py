@@ -1,16 +1,19 @@
-from strategies import strategy1, strategy2, strategy3
+from strategies.strategy1 import Strategy1
+from strategies.strategy2 import Strategy2
+from strategies.strategy3 import Strategy3
 from strategies.exceptions import InvalidExpression, InvalidStrategy
 import argparse
 
 def eval(expression, strategy=1):
-    if strategy == 1:
-        return strategy1.eval(expression)
-    elif strategy == 2:
-        return strategy2.eval(expression)
-    elif strategy == 3:
-        return strategy3.eval(expression)
-    else:
+    if strategy not in (1, 2, 3):
         raise InvalidStrategy()
+    elif strategy == 1:
+        strategy = Strategy1()
+    elif strategy == 2:
+        strategy = Strategy2()
+    elif strategy == 3:
+        strategy = Strategy3()
+    return strategy.eval(expression)
 
 def main():
     parser = argparse.ArgumentParser(prog='calculator.py', description='Evaluate an arithmetic expression')
