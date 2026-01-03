@@ -45,8 +45,6 @@ def precedence(operator):
         return 1
     elif operator == '^':
         return 2
-    else:
-        return -1
 
 def convert_to_postfix(tokens):
     st = []
