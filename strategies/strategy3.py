@@ -7,8 +7,6 @@ class Strategy3(AbstractStrategy):
 
     def eval(self, expression):
         tokens = self.parse(expression)
-        if len(tokens) == 0:
-            raise InvalidExpression('The expression is empty')
         return self.simplify(tokens)
 
     def next(self, tokens):

@@ -22,6 +22,8 @@ class AbstractStrategy(ABC):
             else:
                 raise InvalidExpression('The expression contains an invalid token')
         tokens = str.split()
+        if len(tokens) == 0:
+            raise InvalidExpression('The expression is empty')
         for i in range(0, len(tokens)):
             if tokens[i] == '-' and (i == 0 or tokens[i-1] == '(' or tokens[i-1] in self._operators):
                 tokens[i] = '_'
