@@ -3,6 +3,7 @@ from strategies.strategy import AbstractStrategy
 from strategies.exceptions import InvalidExpression
 
 class ConcreteStrategy(AbstractStrategy):
+
     def __init__(self):
         super().__init__()
 
