@@ -66,12 +66,12 @@ The unit tests can be run in the following ways.
     # We are going to use the "discover" argument, and we are going to pass the start directory with the -s option.
     # We will use the -v option for verbose output.
     % python -m unittest discover -s tests -v
-    test_strategy1 (test_invalid_inputs.TestInvalidInputs.test_strategy1) ... ok
-    test_strategy2 (test_invalid_inputs.TestInvalidInputs.test_strategy2) ... ok
-    test_strategy3 (test_invalid_inputs.TestInvalidInputs.test_strategy3) ... ok
-    test_strategy1 (test_valid_inputs.TestValidInputs.test_strategy1) ... ok
-    test_strategy2 (test_valid_inputs.TestValidInputs.test_strategy2) ... ok
-    test_strategy3 (test_valid_inputs.TestValidInputs.test_strategy3) ... ok
+    test_eval_with_invalid_inputs (test_strategy1.TestStrategy1.test_eval_with_invalid_inputs) ... ok
+    test_eval_with_valid_inputs (test_strategy1.TestStrategy1.test_eval_with_valid_inputs) ... ok
+    test_eval_with_invalid_inputs (test_strategy2.TestStrategy2.test_eval_with_invalid_inputs) ... ok
+    test_eval_with_valid_inputs (test_strategy2.TestStrategy2.test_eval_with_valid_inputs) ... ok
+    test_eval_with_invalid_inputs (test_strategy3.TestStrategy3.test_eval_with_invalid_inputs) ... ok
+    test_eval_with_valid_inputs (test_strategy3.TestStrategy3.test_eval_with_valid_inputs) ... ok
 
     ----------------------------------------------------------------------
     Ran 6 tests in 0.001s
@@ -81,17 +81,24 @@ The unit tests can be run in the following ways.
     # Voila! It worked. But what if we want to run each test file individually?
     # We can do that with the syntax `python -m unittest <path_to_test_file>`
     # Here are some examples
-    % python -m unittest tests/test_valid_inputs.py
-    ...
+    % python -m unittest tests/test_strategy1.py
+    ..
     ----------------------------------------------------------------------
-    Ran 3 tests in 0.001s
+    Ran 2 tests in 0.001s
 
     OK
 
-    % python -m unittest tests/test_invalid_inputs.py
-    ...
+    % python -m unittest tests/test_strategy2.py
+    ..
     ----------------------------------------------------------------------
-    Ran 3 tests in 0.001s
+    Ran 2 tests in 0.001s
+
+    OK
+
+    % python -m unittest tests/test_strategy3.py
+    ..
+    ----------------------------------------------------------------------
+    Ran 2 tests in 0.001s
 
     OK
 
@@ -109,9 +116,9 @@ The unit tests can be run in the following ways.
     # A unit test tests a method, function, or class.
     # (The words "method" and "function" are often interchangeable, but sometimes "method" refers to an object's method.)
 
-    # The unit tests contained within tests/test_valid_inputs.py and tests/test_invalid_inputs.py test the Strategy classes.
+    # The unit tests contained within the tests folder test the Strategy classes.
     # In particular, they test the Strategy.eval methods, for each strategy.
-    # We can think of the Strategy.eval methods as units. There are three Strategy classes, so it's natural to write three unit tests.
+    # We can think of the Strategy.eval methods as units.
     # I wrote three unit tests for valid inputs, and three unit tests for invalid inputs.
     # The reason we use the word "unit", is that a method is often considered to be the smallest component of code that you want to test.
     # I said earlier that a unit can be a class, but it is most often considered to be a method or a function.
