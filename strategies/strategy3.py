@@ -46,21 +46,21 @@ class Strategy3(AbstractStrategy):
 
         if operator == '_':
             if len(tokens) < index + 2:
-                raise InvalidExpression('A negation operation is missing an operand')
+                raise InvalidExpression(f'The {operator} operation is missing an operand')
 
             operand = tokens[index+1]
 
             if not self.is_number(operand):
-                raise InvalidExpression('A negation operation has an invalid operand')
+                raise InvalidExpression(f'The {operator} operation has an invalid operand')
         else:
             if index == 0 or len(tokens) < index + 2:
-                raise InvalidExpression('A binary operation is missing one or more operands')
+                raise InvalidExpression(f'The {operator} operation is missing one or more operands')
 
             operand1 = tokens[index-1]
             operand2 = tokens[index+1]
 
             if not self.is_number(operand1) or not self.is_number(operand2):
-                raise InvalidExpression('A binary operation has one or more invalid operands')
+                raise InvalidExpression(f'The {operator} operation has one or more invalid operands')
 
             if operator == '/' and float(operand2) == 0:
                 raise InvalidExpression('Division by zero is not allowed')
