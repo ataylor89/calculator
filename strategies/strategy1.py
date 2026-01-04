@@ -39,7 +39,7 @@ class Strategy1(AbstractStrategy):
                 stack.append(token)
             elif token == '_':
                 if len(stack) == 0:
-                    raise InvalidExpression('The negation operation is missing an operand')
+                    raise InvalidExpression(f'The {token} operation is missing an operand')
                 val = stack.pop()
                 stack.append(-1 * val)
             else:
