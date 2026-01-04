@@ -43,6 +43,9 @@ class AbstractStrategy(ABC):
                         raise InvalidExpression('The string buffer cannot be parsed as a number')
             else:
                 raise InvalidExpression('The expression contains an invalid character')
+        for i in range(0, len(tokens)):
+            if tokens[i] == '-' and (i == 0 or tokens[i-1] == '(' or tokens[i-1] in self._operators):
+                tokens[i] = '_'
         return tokens
 
     def is_number(self, s):
