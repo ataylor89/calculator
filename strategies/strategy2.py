@@ -13,12 +13,12 @@ class Strategy2(AbstractStrategy):
         operator = operators.pop()
         if operator == '_':
             if len(operands) == 0:
-                raise InvalidExpression('A negation operation is missing an operand')
+                raise InvalidExpression(f'The {operator} operation is missing an operand')
             operand1 = operands.pop()
             operands.append(-1 * operand1)
         elif operator in self._operators:
             if len(operands) < 2:
-                raise InvalidExpression('A binary operation is missing one or more operands')
+                raise InvalidExpression(f'The {operator} operation is missing one or more operands')
             operand2 = operands.pop()
             operand1 = operands.pop()
             if operator == '+':
