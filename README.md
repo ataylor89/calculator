@@ -19,6 +19,7 @@ The program can be run with the command `python calculator.py <arithmetic_expres
 
     # Test right associativity of powers (it should be 2417851639229258349412352 instead of 4096)
     % python calculator.py "2^3^4"
+    2417851639229258349412352
 
     # Test a single numeric input
     % python calculator.py "1"
