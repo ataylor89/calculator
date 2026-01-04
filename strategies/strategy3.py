@@ -12,8 +12,8 @@ class Strategy3(AbstractStrategy):
     def next(self, tokens):
         n = len(tokens)
         index = None
-        highest_priority = -1
         nestedness = 0
+        highest_priority = -1
 
         for i in range(0, n):
             token = tokens[i]
