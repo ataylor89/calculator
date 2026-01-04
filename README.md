@@ -61,7 +61,7 @@ The unit tests can be run in the following ways.
     calculator.py	strategies	tests
 
     # The command python -m <module_name> runs a module. It can be a module you wrote, or a module from the standard library.
-    # For example, you can try running the command `python -m calculator.py "1+2^3"` to see that it works for the calculator module.
+    # For example, you can try running the command `python -m calculator "1+2^3"` to see that it works for the calculator module.
     # We are now going to run the unittest module, a module from the Python standard library.
     # We are going to use the "discover" argument, and we are going to pass the start directory with the -s option.
     # We will use the -v option for verbose output.
