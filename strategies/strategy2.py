@@ -50,8 +50,8 @@ class Strategy2(AbstractStrategy):
                     self.perform_operation(operators, operands)
                 operators.pop()
             elif token in self._operators:
-                la = self.is_left_associative(token)
-                while ops and ops[-1] != '(' and (pr(ops[-1]) > pr(token) or (pr(ops[-1]) == pr(token) and la)):
+                left_assoc = self.is_left_associative(token)
+                while ops and ops[-1] != '(' and (pr(ops[-1]) > pr(token) or (pr(ops[-1]) == pr(token) and left_assoc)):
                     self.perform_operation(operators, operands)
                 operators.append(token)
 
