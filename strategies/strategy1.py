@@ -11,27 +11,26 @@ class Strategy1(AbstractStrategy):
         return self.eval_postfix(postfix)
 
     def convert_to_postfix(self, tokens):
-        st = []
-        res = []
+        stack = []
+        result = []
         pr = self.precedence
-        for i in range(0, len(tokens)):
-            token = tokens[i]
+        for token in tokens:
             if self.is_number(token):
-                res.append(float(token))
+                result.append(float(token))
             elif token == '(':
-                st.append(token)
+                stack.append(token)
             elif token == ')':
-                while st and st[-1] != '(':
-                    res.append(st.pop())
-                st.pop()
+                while stack and stack[-1] != '(':
+                    result.append(stack.pop())
+                stack.pop()
             elif token in self._operators:
-                la = self.is_left_associative(token)
-                while st and st[-1] != '(' and (pr(st[-1]) > pr(token) or (pr(st[-1]) == pr(token) and la)):
-                    res.append(st.pop())
-                st.append(token)
-        while st:
-            res.append(st.pop())
-        return res
+                left_assoc = self.is_left_associative(token)
+                while stack and stack[-1] != '(' and (pr(stack[-1]) > pr(token) or (pr(stack[-1]) == pr(token) and left_assoc)):
+                    result.append(stack.pop())
+                stack.append(token)
+        while stack:
+            result.append(stack.pop())
+        return result
 
     def eval_postfix(self, tokens):
         stack = []
