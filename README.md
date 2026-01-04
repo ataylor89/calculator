@@ -113,7 +113,7 @@ The unit tests can be run in the following ways.
     # In particular, they test the Strategy.eval methods, for each strategy.
     # We can think of the Strategy.eval methods as units. There are three Strategy classes, so it's natural to write three unit tests.
     # I wrote three unit tests for valid inputs, and three unit tests for invalid inputs.
-    # The reason we use the word "unit", is that a method is considered to be the smallest component of code that you want to test.
+    # The reason we use the word "unit", is that a method is often considered to be the smallest component of code that you want to test.
     # I said earlier that a unit can be a class, but it is most often considered to be a method or a function.
 
     # I wanted to talk a little bit about unit testing. But now it's time to wrap things up.
