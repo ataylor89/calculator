@@ -21,7 +21,7 @@ The program can be run with the command `python calculator.py <arithmetic_expres
     % python calculator.py "2^3^4"
     2417851639229258349412352
 
-    # Test a single numeric input
+    # Test a single number
     % python calculator.py "1"
     1
 
