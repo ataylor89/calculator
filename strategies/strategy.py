@@ -42,7 +42,7 @@ class AbstractStrategy(ABC):
                     else:
                         raise InvalidExpression('The string buffer cannot be parsed as a number')
             else:
-                raise InvalidExpression('The expression contains an invalid character')
+                raise InvalidExpression('The expression contains one or more invalid characters')
         for i in range(0, len(tokens)):
             if tokens[i] == '-' and (i == 0 or tokens[i-1] == '(' or tokens[i-1] in self._operators):
                 tokens[i] = '_'
