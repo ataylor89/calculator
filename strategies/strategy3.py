@@ -12,8 +12,8 @@ class Strategy3(AbstractStrategy):
     def next(self, tokens):
         n = len(tokens)
         index = None
-        nestedness = 0
         highest_priority = -1
+        nestedness = 0
 
         for i in range(0, n):
             token = tokens[i]
@@ -35,7 +35,8 @@ class Strategy3(AbstractStrategy):
                 continue
             elif token in self._operators:
                 priority = self.precedence(token) + 3 * nestedness
-                if priority > highest_priority:
+                right_assoc = self.is_right_associative(token)
+                if priority > highest_priority or (priority == highest_priority and right_assoc):
                     highest_priority = priority
                     index = i
 

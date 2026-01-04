@@ -58,9 +58,10 @@ class AbstractStrategy(ABC):
             return False
 
     def is_left_associative(self, operator):
-        if operator in ('^', '_'):
-            return False
-        return True
+        return operator in ('+', '-', '*', '/')
+
+    def is_right_associative(self, operator):
+        return operator in ('^', '_')
 
     def precedence(self, operator):
         if operator in ('+', '-'):
