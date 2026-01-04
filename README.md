@@ -135,3 +135,27 @@ Furthermore, it's hard to find a good use case for postfix notation. Evaluating 
 In my opinion, strategy1.py (which uses postfix) is the simplest algorithm, and the easiest to follow. That is why I made it the default.
 
 We can talk about these things, in more detail, in the next sections.
+
+## A brief note on unit testing
+
+The idea behind unit testing is to test a program unit by unit. A unit can be a method, function, or class.
+
+The Strategy.eval methods are important units in my program. There are three Strategy.eval methods in total (one for each strategy).
+
+I test these units in unit tests to make sure that they work properly.
+
+Are there any other units that I should be testing? Honestly, I think the answer is yes.
+
+The AbstractStrategy.parse method is another important unit that I should test. I want to make sure that the expression parsing is correct.
+
+In the future, I might write a test_parser.py file and place it in the tests folder.
+
+The purpose of this file will be to test the AbstractStrategy.parse method.
+
+I can give it different inputs (just like I did with eval) and make sure it produces the correct output.
+
+To return to the initial point, the idea behind unit testing is to test a program unit by unit.
+
+We can say, "This unit works properly. This unit works properly. Are there any units that don't work properly?"
+
+We can test software unit by unit, using unit tests, to make sure that the software works properly.
