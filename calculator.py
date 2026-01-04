@@ -15,7 +15,7 @@ def eval(expression, strategy=1):
         strategy = Strategy3()
     return strategy.eval(expression)
 
-def main():
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='calculator.py', description='Evaluate an arithmetic expression')
     parser.add_argument('expression', type=str)
     parser.add_argument('-s', '--strategy', type=int, default=1)
@@ -27,6 +27,3 @@ def main():
         print(e)
     except Exception as e:
         print('There was an error while evaluating the expression')
-
-if __name__ == '__main__':
-    main()
