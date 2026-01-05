@@ -19,7 +19,7 @@ equations = '''
 
 '''
 
-def test_data():
+def parse():
     data = []
     for line in equations.split('\n'):
         line = line.strip()

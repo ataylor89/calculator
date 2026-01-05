@@ -13,7 +13,7 @@ _
 
 '''
 
-def test_data():
+def parse():
     data = []
     for line in expressions.split('\n'):
         line = line.strip()

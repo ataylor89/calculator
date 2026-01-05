@@ -15,6 +15,6 @@ class TestAbstractStrategy(TestCase):
     
     def test_parser(self):
         strategy = ConcreteStrategy()
-        test_data = parse_expressions.test_data()
+        test_data = parse_expressions.parse()
         for (test_input, desired_output) in test_data:
             assert strategy.parse(test_input) == desired_output
