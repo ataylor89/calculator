@@ -1,5 +1,3 @@
-from tests.test_data import util
-
 expressions = '''
 
 1 + 2
@@ -19,6 +17,6 @@ def parse():
     if len(lines) % 2 == 0:
         for i in range(0, len(lines), 2):
             infix = lines[i]
-            postfix = util.parse_list(lines[i+1], " ", to_float=True)
+            postfix = [token.strip() for token in lines[i+1].split(" ")]
             data.append((infix, postfix))
     return data

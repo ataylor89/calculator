@@ -16,7 +16,7 @@ class Strategy1(AbstractStrategy):
         pr = self.precedence
         for token in tokens:
             if self.is_number(token):
-                result.append(float(token))
+                result.append(token)
             elif token == '(':
                 stack.append(token)
             elif token == ')':
@@ -36,7 +36,7 @@ class Strategy1(AbstractStrategy):
         stack = []
         for token in tokens:
             if self.is_number(token):
-                stack.append(token)
+                stack.append(float(token))
             elif token == '_':
                 if len(stack) == 0:
                     raise InvalidExpression(f'The {token} operation is missing an operand')
