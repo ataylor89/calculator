@@ -1,7 +1,7 @@
 from unittest import TestCase
 from strategies.strategy import AbstractStrategy
 from strategies.exceptions import InvalidExpression
-from tests import parser_data
+from tests.test_data import parser_data
 
 class ConcreteStrategy(AbstractStrategy):
 

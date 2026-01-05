@@ -1,7 +1,7 @@
 from unittest import TestCase
 from strategies.strategy2 import Strategy2
 from strategies.exceptions import InvalidExpression
-from tests import valid_inputs, invalid_inputs
+from tests.test_data import valid_inputs, invalid_inputs
 
 class TestStrategy2(TestCase):
     

@@ -1,4 +1,4 @@
-import util
+from tests import util
 
 expressions = '''
 
