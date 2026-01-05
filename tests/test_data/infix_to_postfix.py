@@ -1,4 +1,4 @@
-from tests import util
+from tests.test_data import util
 
 expressions = '''
 
