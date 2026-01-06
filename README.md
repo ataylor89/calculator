@@ -175,7 +175,7 @@ Here is a vocabulary sheet, meant to guide the reader through subjects like arit
 
 | Word/Phrase | Definition |
 | ----------- | ---------- |
-| Operand | An element from the underlying set of an algebraic structure (typically numbers like 1, 2, 3, etc) |
+| Operand | An input to an operator; an element from the underlying set of an algebraic structure |
 | Operator | A function that operates on one or more operands (e.g. unary operators, binary operators, field operators, etc) |
 | Relation | Formally, a set of ordered pairs (we can think of the equality and inequality relations as a set of ordered pairs) |
 | Expression | A sequence of mathematical symbols, consisting of operators and operands |
@@ -185,6 +185,10 @@ Here is a vocabulary sheet, meant to guide the reader through subjects like arit
 | Integers | An integer is an expression of the form a-b, where a and b are natural numbers (formal) |
 | Rationals | A rational number is an expression of the form p/q, where p is an integer and q is a non-zero integer (formal) |
 | Reals | A real number is a Cauchy sequence (formal); a real number is a point on the number line (informal) |
+| Set | A collection of mathematical objects (e.g. the naturals, the integers, the rationals, the reals, the complex numbers, the set of all possible m by n matrices) |
+| Vector | A list of numbers |
+| Matrix | A rectangular array of numbers |
+| Field axioms | I like to remember them with the acronym MAD. The five addition axioms, A1 through A5 (closure, associativity, commutativity, additive identity, additive inverses). The five multiplication axioms, M1 through M5 (closure, associativity, commutativity, multiplicative identity, multiplicative inverses). The distributivity axiom, D for distributivity. Real numbers, together with addition and multiplication, satisfy the eleven field axioms, and so they qualify to be a field. |
 
 ## Vocabulary (part two)
 
