@@ -248,7 +248,7 @@ Let's review what we learned with a list of key points.
 8. The real number field is a common algebraic structure
 9. We are accustomed to real numbers and we are accustomed to the field operators (PEMDAS)
 10. When we evaluate a mathematical expression, written in infix notation, we have to follow the order of operations (OOO)
-11. When we evaluate a mathematical expression, written in postfix operation, we don't need the PEMDAS rules
+11. When we evaluate a mathematical expression, written in postfix notation, we don't need the PEMDAS rules
 12. When we write a mathematical expression using infix notation, we often need parentheses
 13. When we write a mathematical expression using postfix notation, we don't need parentheses
 14. It is easier for a program to evaluate postfix notation than it is to evaluate infix notation
