@@ -1,7 +1,7 @@
 from unittest import TestCase
 from strategies.strategy import AbstractStrategy
 from strategies.exceptions import InvalidExpression
-from tests.test_data import parse_expressions
+from tests import parser
 
 class ConcreteStrategy(AbstractStrategy):
 
@@ -13,8 +13,8 @@ class ConcreteStrategy(AbstractStrategy):
 
 class TestAbstractStrategy(TestCase):
     
-    def test_parser(self):
+    def test_expression_parser(self):
         strategy = ConcreteStrategy()
-        test_data = parse_expressions.parse()
+        test_data = parser.load_parse_expressions()
         for (test_input, desired_output) in test_data:
             assert strategy.parse(test_input) == desired_output
