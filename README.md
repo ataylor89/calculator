@@ -283,7 +283,7 @@ The real number field is a structure consisting of (1) the real numbers (2) the 
 
 The real numbers qualify to be a field, when combined with PEMDAS and the equality relation.
 
-The integers, on the other hand, do not quality to be a field, because they do not satisfy the requirements of a field.
+The integers, on the other hand, do not quality to be a field, because they do not satisfy the requirements of a field (in particular, the integers do not have multiplicative inverses, which are needed to be a field).
 
 I wanted to explain the difference between the "real numbers" and the "real number field".
 
