@@ -1,21 +1,22 @@
-from strategies.strategy import AbstractStrategy
-from strategies.exceptions import InvalidExpression
+from parser import Parser
+from exceptions import InvalidExpression
 
-class Strategy1(AbstractStrategy):
+class Strategy1:
+
     def __init__(self):
-        super().__init__()
+        self.parser = Parser()
 
     def eval(self, expression):
-        tokens = self.parse(expression)
+        tokens = self.parser.parse(expression)
         postfix = self.convert_to_postfix(tokens)
         return self.eval_postfix(postfix)
 
     def convert_to_postfix(self, tokens):
         stack = []
         result = []
-        pr = self.precedence
+        pr = self.parser.precedence
         for token in tokens:
-            if self.is_number(token):
+            if self.parser.is_number(token):
                 result.append(token)
             elif token == '(':
                 stack.append(token)
@@ -23,8 +24,8 @@ class Strategy1(AbstractStrategy):
                 while stack and stack[-1] != '(':
                     result.append(stack.pop())
                 stack.pop()
-            elif token in self._operators:
-                left_assoc = self.is_left_associative(token)
+            elif token in self.parser.operators:
+                left_assoc = self.parser.is_left_associative(token)
                 while stack and stack[-1] != '(' and (pr(stack[-1]) > pr(token) or (pr(stack[-1]) == pr(token) and left_assoc)):
                     result.append(stack.pop())
                 stack.append(token)
@@ -35,7 +36,7 @@ class Strategy1(AbstractStrategy):
     def eval_postfix(self, tokens):
         stack = []
         for token in tokens:
-            if self.is_number(token):
+            if self.parser.is_number(token):
                 stack.append(float(token))
             elif token == '_':
                 if len(stack) == 0:

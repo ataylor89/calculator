@@ -1,12 +1,13 @@
-from strategies.strategy import AbstractStrategy
-from strategies.exceptions import InvalidExpression
+from parser import Parser
+from exceptions import InvalidExpression
 
-class Strategy2(AbstractStrategy):
+class Strategy2:
+
     def __init__(self):
-        super().__init__()
+        self.parser = Parser()
 
     def eval(self, expression):
-        tokens = self.parse(expression)
+        tokens = self.parser.parse(expression)
         return self.eval_tokens(tokens)
 
     def perform_operation(self, operators, operands):
@@ -16,7 +17,7 @@ class Strategy2(AbstractStrategy):
                 raise InvalidExpression(f'The {operator} operation is missing an operand')
             operand1 = operands.pop()
             operands.append(-1 * operand1)
-        elif operator in self._operators:
+        elif operator in self.parser.operators:
             if len(operands) < 2:
                 raise InvalidExpression(f'The {operator} operation is missing one or more operands')
             operand2 = operands.pop()
@@ -37,11 +38,11 @@ class Strategy2(AbstractStrategy):
     def eval_tokens(self, tokens):
         operands = []
         operators = ops = []
-        pr = self.precedence
+        pr = self.parser.precedence
 
         for i in range(0, len(tokens)):
             token = tokens[i]
-            if self.is_number(token):
+            if self.parser.is_number(token):
                 operands.append(float(token))
             elif token == '(':
                 operators.append(token)
@@ -49,8 +50,8 @@ class Strategy2(AbstractStrategy):
                 while operators and operators[-1] != '(':
                     self.perform_operation(operators, operands)
                 operators.pop()
-            elif token in self._operators:
-                left_assoc = self.is_left_associative(token)
+            elif token in self.parser.operators:
+                left_assoc = self.parser.is_left_associative(token)
                 while ops and ops[-1] != '(' and (pr(ops[-1]) > pr(token) or (pr(ops[-1]) == pr(token) and left_assoc)):
                     self.perform_operation(operators, operands)
                 operators.append(token)

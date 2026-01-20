@@ -1,7 +1,7 @@
 from strategies.strategy1 import Strategy1
 from strategies.strategy2 import Strategy2
 from strategies.strategy3 import Strategy3
-from strategies.exceptions import InvalidExpression, InvalidStrategy
+from exceptions import InvalidExpression, InvalidStrategy
 import argparse
 
 def eval(expression, strategy=1):

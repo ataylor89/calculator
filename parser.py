@@ -1,15 +1,10 @@
-from abc import ABC, abstractmethod
-from strategies.exceptions import InvalidExpression
+from exceptions import InvalidExpression
 
-class AbstractStrategy(ABC):
+class Parser:
     def __init__(self):
-        self._digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
-        self._operators = {'+', '-', '*', '/', '_', '^'}
-        self._parentheses = {'(', ')'}
-
-    @abstractmethod
-    def eval(self, expression):
-        pass
+        self.digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
+        self.operators = {'+', '-', '*', '/', '_', '^'}
+        self.parentheses = {'(', ')'}
 
     def parse(self, expression):
         tokens = []
@@ -18,7 +13,7 @@ class AbstractStrategy(ABC):
         n = len(expression)
         for i in range(0, n):
             ch = expression[i]
-            if ch in self._operators or ch in self._parentheses:
+            if ch in self.operators or ch in self.parentheses:
                 if buffer:
                     if self.is_number(buffer):
                         tokens.append(buffer)
@@ -33,7 +28,7 @@ class AbstractStrategy(ABC):
                         buffer = ''
                     else:
                         raise InvalidExpression('The string buffer cannot be parsed as a number')
-            elif ch in self._digits or ch == '.':
+            elif ch in self.digits or ch == '.':
                 buffer += ch
                 if buffer and i == n - 1:
                     if self.is_number(buffer):
@@ -46,7 +41,7 @@ class AbstractStrategy(ABC):
         if not tokens:
             raise InvalidExpression('The expression is empty')
         for i in range(0, len(tokens)):
-            if tokens[i] == '-' and (i == 0 or tokens[i-1] == '(' or tokens[i-1] in self._operators):
+            if tokens[i] == '-' and (i == 0 or tokens[i-1] == '(' or tokens[i-1] in self.operators):
                 tokens[i] = '_'
         return tokens
 
