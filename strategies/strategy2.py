@@ -29,7 +29,7 @@ class Strategy2:
             elif operator == '*':
                 operands.append(operand1 * operand2)
             elif operator == '/':
-                if operator == '/' and operand2 == 0:
+                if operand2 == 0:
                     raise InvalidExpression('Division by zero is not allowed')
                 operands.append(operand1 / operand2)
             elif operator == '^':
