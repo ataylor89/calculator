@@ -2,7 +2,6 @@ from parser import Parser
 from exceptions import InvalidExpression
 
 class Strategy2:
-
     def __init__(self):
         self.parser = Parser()
 
